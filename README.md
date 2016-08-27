@@ -3,6 +3,9 @@ About
 
 **DGSerial** is **Serial Port** helper libray for *.NET.
 
+## Download
+
+**[Latest Release](../../releases/latest)** 
 
 Copyright
 ---
