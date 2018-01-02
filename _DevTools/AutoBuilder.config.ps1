@@ -41,9 +41,6 @@ $builds = @(
 		ReleaseBinExcludeProjects = @(
 			@{
 				Name = "DGSerial.Test";
-			},
-			@{
-				Name = "DGSerial.TestConsole";
 			}
 		);
 		#files to include in the release binary package
