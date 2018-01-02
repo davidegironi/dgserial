@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGSerial", "DGSerial\DGSerial.csproj", "{FBE58EBF-EC13-474C-9049-EAC8943FE30F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGSerial.Test", "DGSerial.Test\DGSerial.Test.csproj", "{F8C35F3B-5FB6-4B56-BF76-68A106A72F08}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGSerial.TestConsole", "DGSerial.TestConsole\DGSerial.TestConsole.csproj", "{AE25A915-E033-4425-8980-D455CC002987}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{F8C35F3B-5FB6-4B56-BF76-68A106A72F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8C35F3B-5FB6-4B56-BF76-68A106A72F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8C35F3B-5FB6-4B56-BF76-68A106A72F08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE25A915-E033-4425-8980-D455CC002987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE25A915-E033-4425-8980-D455CC002987}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE25A915-E033-4425-8980-D455CC002987}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE25A915-E033-4425-8980-D455CC002987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

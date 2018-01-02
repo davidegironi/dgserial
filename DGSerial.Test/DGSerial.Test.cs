@@ -4,14 +4,13 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Linq;
-using System.Configuration;
-using System.Threading;
 using DG.Serial.Helper;
 using NUnit.Framework;
-using System.IO.Ports;
+using System;
+using System.Configuration;
 using System.Diagnostics;
+using System.IO.Ports;
+using System.Threading;
 
 namespace DG.Serial.Test
 {
@@ -62,7 +61,7 @@ namespace DG.Serial.Test
 
             Assert.IsTrue(serial.Close());
         }
-        
+
         void WriteBytes_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
@@ -82,13 +81,13 @@ namespace DG.Serial.Test
 
             byte[] buffertx = DGSerialHelper.StringToBytes("Test1");
             Assert.IsTrue(serial1.WriteBytes(buffertx));
-            
+
             serial1.Close();
             Thread.Sleep(1000);
 
             serial2.Close();
         }
-        
+
         [Test]
         public void ReadBytes()
         {
@@ -147,7 +146,7 @@ namespace DG.Serial.Test
             DGSerial serial1 = new DGSerial(_portName1, _baudRate1);
 
             Thread thread = new Thread(new ThreadStart(WriteBytesBlocking_ReadThread));
-            
+
             serial1.Open();
             byte[] buffertx = new byte[serial1.Get().WriteBufferSize];
             Stopwatch watch = Stopwatch.StartNew();
@@ -172,7 +171,7 @@ namespace DG.Serial.Test
 
             serial1.Close();
         }
-        
+
         [Test]
         public void ReadBytesBlocking()
         {
@@ -266,13 +265,13 @@ namespace DG.Serial.Test
 
             Assert.That(serial2.BytesToRead(), Is.EqualTo(buffertx.Length));
             byte[] bufferrx = serial2.ReadBytes();
-            
+
             Assert.That(serial2.BytesToRead(), Is.EqualTo(0));
 
             serial1.Close();
             serial2.Close();
         }
-        
+
         [Test]
         public void BytesToWrite()
         {
@@ -322,7 +321,7 @@ namespace DG.Serial.Test
             Assert.IsTrue(serial1.WriteBytes(buffertx1));
             byte[] bufferrx1 = serial2.ReadBytes();
 
-            byte[] buffertx2 = new byte[serial1.Get().ReadBufferSize-5];
+            byte[] buffertx2 = new byte[serial1.Get().ReadBufferSize - 5];
             Assert.IsTrue(serial1.WriteBytes(buffertx2));
             byte[] bufferrx2 = serial2.ReadBytes();
 
