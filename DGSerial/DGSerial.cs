@@ -5,9 +5,9 @@
 #endregion
 
 using System;
-using System.Linq;
-using System.IO.Ports;
 using System.Diagnostics;
+using System.IO.Ports;
+using System.Linq;
 using System.Threading;
 
 namespace DG.Serial
@@ -89,7 +89,7 @@ namespace DG.Serial
             _serialPort.ReadTimeout = _loadedReadTimeout;
             _serialPort.WriteTimeout = _loadedWriteTimeout;
         }
-        
+
         /// <summary>
         /// Initialize the port connection
         /// </summary>
@@ -174,6 +174,36 @@ namespace DG.Serial
         { }
 
         /// <summary>
+        /// Initialize the port connection
+        /// </summary>
+        /// <param name="serialPort"></param>
+        /// <param name="readTimeout"></param>
+        /// <param name="writeTimeout"></param>
+        public DGSerial(
+            SerialPort serialPort,
+            int readTimeout,
+            int writeTimeout)
+        {
+            _loadedReadTimeout = readTimeout;
+            _loadedWriteTimeout = writeTimeout;
+
+            _serialPort = serialPort;
+
+            _serialPort.ReadTimeout = _loadedReadTimeout;
+            _serialPort.WriteTimeout = _loadedWriteTimeout;
+        }
+
+        /// <summary>
+        /// Initialize the port connection
+        /// </summary>
+        /// <param name="portName"></param>
+        /// <param name="baudRate"></param>
+        public DGSerial(
+             SerialPort serialPort)
+            : this(serialPort, DefaultReadTimeout, DefaultWriteTimeout)
+        { }
+
+        /// <summary>
         /// Return the current serial port instance
         /// </summary>
         /// <returns></returns>
@@ -235,7 +265,7 @@ namespace DG.Serial
 
             _serialPort.DiscardInBuffer();
         }
-        
+
         /// <summary>
         /// Discard data from the output buffer
         /// </summary>
@@ -246,7 +276,7 @@ namespace DG.Serial
 
             _serialPort.DiscardOutBuffer();
         }
-        
+
         /// <summary>
         /// Get number of bytes to read
         /// </summary>
@@ -282,7 +312,7 @@ namespace DG.Serial
 
             _serialPort.DataReceived += DataReceivedEventHandler;
         }
-        
+
         /// <summary>
         /// Read bytes from port connection
         /// </summary>
@@ -384,7 +414,7 @@ namespace DG.Serial
                 ret = new byte[] { };
                 byte read = 0x00;
                 byte previousbyte = 0x00;
-                while(true)
+                while (true)
                 {
                     read = (byte)_serialPort.ReadByte();
                     if (read == to && previousbyte != escape)
@@ -396,7 +426,7 @@ namespace DG.Serial
                     }
                     else
                     {
-                        if(previousbyte == escape)
+                        if (previousbyte == escape)
                             ret = ret.Concat(new byte[] { read }).ToArray();
                     }
                     previousbyte = read;
