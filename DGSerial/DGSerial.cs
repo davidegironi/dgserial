@@ -15,6 +15,15 @@ namespace DG.Serial
     public class DGSerial
     {
         /// <summary>
+        /// Catch all Exception
+        /// </summary>
+        private bool CatchAllExceptionsDefault = false;
+        /// <summary>
+        /// Catch all Exception
+        /// </summary>
+        public bool CatchAllExceptions { get; set; }
+
+        /// <summary>
         /// Serial port
         /// </summary>
         private SerialPort _serialPort;
@@ -79,6 +88,8 @@ namespace DG.Serial
             int readTimeout,
             int writeTimeout)
         {
+            this.CatchAllExceptions = CatchAllExceptionsDefault;
+
             _loadedReadTimeout = readTimeout;
             _loadedWriteTimeout = writeTimeout;
 
@@ -184,6 +195,8 @@ namespace DG.Serial
             int readTimeout,
             int writeTimeout)
         {
+            this.CatchAllExceptions = CatchAllExceptionsDefault;
+
             _loadedReadTimeout = readTimeout;
             _loadedWriteTimeout = writeTimeout;
 
@@ -217,7 +230,17 @@ namespace DG.Serial
         /// </summary>
         public bool IsOpen()
         {
-            return _serialPort.IsOpen;
+            try
+            {
+                return _serialPort.IsOpen;
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return false;
+            }
         }
 
         /// <summary>
@@ -225,16 +248,23 @@ namespace DG.Serial
         /// </summary>
         public bool Open()
         {
-            if (!_serialPort.IsOpen)
-                try
+            try
+            {
+                if (!_serialPort.IsOpen)
                 {
                     _serialPort.Open();
                     _serialPort.DiscardOutBuffer();
                     _serialPort.DiscardInBuffer();
                 }
-                catch { }
-
-            return _serialPort.IsOpen;
+                return _serialPort.IsOpen;
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return false;
+            }
         }
 
         /// <summary>
@@ -243,16 +273,21 @@ namespace DG.Serial
         /// <returns></returns>
         public bool Close()
         {
-            if (_serialPort.IsOpen)
-                try
-                {
+            try
+            {
+                if (_serialPort.IsOpen)
                     _serialPort.Close();
-                }
-                catch { }
-            else
-                return false;
-
-            return !_serialPort.IsOpen;
+                else
+                    return false;
+                return !_serialPort.IsOpen;
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return false;
+            }
         }
 
         /// <summary>
@@ -260,10 +295,20 @@ namespace DG.Serial
         /// </summary>
         public void DiscardInBuffer()
         {
-            if (!_serialPort.IsOpen)
-                return;
+            try
+            {
+                if (!_serialPort.IsOpen)
+                    return;
 
-            _serialPort.DiscardInBuffer();
+                _serialPort.DiscardInBuffer();
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return;
+            }
         }
 
         /// <summary>
@@ -271,10 +316,20 @@ namespace DG.Serial
         /// </summary>
         public void DiscardOutBuffer()
         {
-            if (!_serialPort.IsOpen)
-                return;
+            try
+            {
+                if (!_serialPort.IsOpen)
+                    return;
 
-            _serialPort.DiscardOutBuffer();
+                _serialPort.DiscardOutBuffer();
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return;
+            }
         }
 
         /// <summary>
@@ -283,10 +338,20 @@ namespace DG.Serial
         /// <returns></returns>
         public int BytesToRead()
         {
-            if (!_serialPort.IsOpen)
-                return -1;
+            try
+            {
+                if (!_serialPort.IsOpen)
+                    return -1;
 
-            return _serialPort.BytesToRead;
+                return _serialPort.BytesToRead;
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return -1;
+            }
         }
 
         /// <summary>
@@ -295,10 +360,20 @@ namespace DG.Serial
         /// <returns></returns>
         public int BytesToWrite()
         {
-            if (!_serialPort.IsOpen)
-                return -1;
+            try
+            {
+                if (!_serialPort.IsOpen)
+                    return -1;
 
-            return _serialPort.BytesToWrite;
+                return _serialPort.BytesToWrite;
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return -1;
+            }
         }
 
         /// <summary>
@@ -307,10 +382,20 @@ namespace DG.Serial
         /// <param name="DataReceivedEventHandler"></param>
         public void AttachDataReceived(SerialDataReceivedEventHandler DataReceivedEventHandler)
         {
-            if (!_serialPort.IsOpen)
-                return;
+            try
+            {
+                if (!_serialPort.IsOpen)
+                    return;
 
-            _serialPort.DataReceived += DataReceivedEventHandler;
+                _serialPort.DataReceived += DataReceivedEventHandler;
+            }
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return;
+            }
         }
 
         /// <summary>
@@ -321,62 +406,72 @@ namespace DG.Serial
         /// <returns></returns>
         public byte[] ReadBytes(int count, int readTimeout)
         {
-            byte[] ret = new byte[] { };
-
-            if (!_serialPort.IsOpen)
-                return ret;
-
-            if (readTimeout != _loadedReadTimeout)
-                _serialPort.ReadTimeout = readTimeout;
-
-            if (_serialPort.ReadTimeout == SerialPort.InfiniteTimeout)
-                while (_serialPort.BytesToRead <= 0) ;
-
             try
             {
-                if (count == -1 && _serialPort.ReadTimeout != SerialPort.InfiniteTimeout)
+                byte[] ret = new byte[] { };
+
+                if (!_serialPort.IsOpen)
+                    return ret;
+
+                if (readTimeout != _loadedReadTimeout)
+                    _serialPort.ReadTimeout = readTimeout;
+
+                if (_serialPort.ReadTimeout == SerialPort.InfiniteTimeout)
+                    while (_serialPort.BytesToRead <= 0) ;
+
+                try
                 {
-                    TimeSpan maxDuration = TimeSpan.FromMilliseconds(readTimeout);
-                    Stopwatch sw = Stopwatch.StartNew();
-                    bool read = false;
-                    int tries = 0;
-                    int triesMstime = 5;
-                    int maxTries = 10; //min out timeout = triesMstime*maxtries
-                    while (sw.Elapsed < maxDuration && !read)
+                    if (count == -1 && _serialPort.ReadTimeout != SerialPort.InfiniteTimeout)
                     {
-                        if (_serialPort.BytesToRead > 0)
+                        TimeSpan maxDuration = TimeSpan.FromMilliseconds(readTimeout);
+                        Stopwatch sw = Stopwatch.StartNew();
+                        bool read = false;
+                        int tries = 0;
+                        int triesMstime = 5;
+                        int maxTries = 10; //min out timeout = triesMstime*maxtries
+                        while (sw.Elapsed < maxDuration && !read)
                         {
-                            byte[] readbytes = new byte[_serialPort.BytesToRead];
-                            _serialPort.Read(readbytes, 0, readbytes.Length);
-                            ret = ret.Concat(readbytes).ToArray();
+                            if (_serialPort.BytesToRead > 0)
+                            {
+                                byte[] readbytes = new byte[_serialPort.BytesToRead];
+                                _serialPort.Read(readbytes, 0, readbytes.Length);
+                                ret = ret.Concat(readbytes).ToArray();
+                            }
+                            else
+                            {
+                                tries++;
+                                if (tries > maxTries)
+                                    read = true;
+                            }
+                            Thread.Sleep(triesMstime);
                         }
-                        else
-                        {
-                            tries++;
-                            if (tries > maxTries)
-                                read = true;
-                        }
-                        Thread.Sleep(triesMstime);
+                    }
+                    else
+                    {
+                        ret = new byte[_serialPort.BytesToRead];
+                        if (ret.Length > 0)
+                            _serialPort.Read(ret, 0, ret.Length);
+                        if (ret.Length != count)
+                            ret = null;
                     }
                 }
-                else
+                catch (TimeoutException)
                 {
-                    ret = new byte[_serialPort.BytesToRead];
-                    if (ret.Length > 0)
-                        _serialPort.Read(ret, 0, ret.Length);
-                    if (ret.Length != count)
-                        ret = null;
+                    ret = null;
                 }
+
+                if (_serialPort.ReadTimeout != _loadedReadTimeout)
+                    _serialPort.ReadTimeout = _loadedReadTimeout;
+
+                return ret;
             }
-            catch (TimeoutException)
+            catch (Exception ex)
             {
-                ret = null;
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return null;
             }
-
-            if (_serialPort.ReadTimeout != _loadedReadTimeout)
-                _serialPort.ReadTimeout = _loadedReadTimeout;
-
-            return ret;
         }
 
         /// <summary>
@@ -398,46 +493,56 @@ namespace DG.Serial
         /// <returns></returns>
         public byte[] ReadBytesTo(byte to, byte escape, int readTimeout)
         {
-            byte[] ret = null;
-
-            if (!_serialPort.IsOpen)
-                return ret;
-
-            if (readTimeout != _loadedReadTimeout)
-                _serialPort.ReadTimeout = readTimeout;
-
-            if (_serialPort.ReadTimeout == SerialPort.InfiniteTimeout)
-                while (_serialPort.BytesToRead <= 0) ;
-
             try
             {
-                ret = new byte[] { };
-                byte read = 0x00;
-                byte previousbyte = 0x00;
-                while (true)
+                byte[] ret = null;
+
+                if (!_serialPort.IsOpen)
+                    return ret;
+
+                if (readTimeout != _loadedReadTimeout)
+                    _serialPort.ReadTimeout = readTimeout;
+
+                if (_serialPort.ReadTimeout == SerialPort.InfiniteTimeout)
+                    while (_serialPort.BytesToRead <= 0) ;
+
+                try
                 {
-                    read = (byte)_serialPort.ReadByte();
-                    if (read == to && previousbyte != escape)
-                        break;
-                    if (read != escape)
+                    ret = new byte[] { };
+                    byte read = 0x00;
+                    byte previousbyte = 0x00;
+                    while (true)
                     {
-                        if (read != to || (read == to && previousbyte == escape))
-                            ret = ret.Concat(new byte[] { read }).ToArray();
-                    }
-                    else
-                    {
-                        if (previousbyte == escape)
-                            ret = ret.Concat(new byte[] { read }).ToArray();
-                    }
-                    previousbyte = read;
-                };
+                        read = (byte)_serialPort.ReadByte();
+                        if (read == to && previousbyte != escape)
+                            break;
+                        if (read != escape)
+                        {
+                            if (read != to || (read == to && previousbyte == escape))
+                                ret = ret.Concat(new byte[] { read }).ToArray();
+                        }
+                        else
+                        {
+                            if (previousbyte == escape)
+                                ret = ret.Concat(new byte[] { read }).ToArray();
+                        }
+                        previousbyte = read;
+                    };
+                }
+                catch (TimeoutException) { }
+
+                if (_serialPort.ReadTimeout != _loadedReadTimeout)
+                    _serialPort.ReadTimeout = _loadedReadTimeout;
+
+                return ret;
             }
-            catch (TimeoutException) { }
-
-            if (_serialPort.ReadTimeout != _loadedReadTimeout)
-                _serialPort.ReadTimeout = _loadedReadTimeout;
-
-            return ret;
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return null;
+            }
         }
 
         /// <summary>
@@ -476,26 +581,36 @@ namespace DG.Serial
         /// <returns></returns>
         public bool WriteBytes(byte[] buffer, int writeTimeout)
         {
-            bool ret = false;
-
-            if (!_serialPort.IsOpen)
-                return ret;
-
-            if (writeTimeout != _loadedWriteTimeout)
-                _serialPort.WriteTimeout = writeTimeout;
-
             try
             {
-                _serialPort.Write(buffer, 0, buffer.Length);
-                ret = true;
+                bool ret = false;
+
+                if (!_serialPort.IsOpen)
+                    return ret;
+
+                if (writeTimeout != _loadedWriteTimeout)
+                    _serialPort.WriteTimeout = writeTimeout;
+
+                try
+                {
+                    _serialPort.Write(buffer, 0, buffer.Length);
+                    ret = true;
+                }
+                catch (TimeoutException)
+                { }
+
+                if (_serialPort.WriteTimeout != _loadedWriteTimeout)
+                    _serialPort.WriteTimeout = _loadedWriteTimeout;
+
+                return ret;
             }
-            catch (TimeoutException)
-            { }
-
-            if (_serialPort.WriteTimeout != _loadedWriteTimeout)
-                _serialPort.WriteTimeout = _loadedWriteTimeout;
-
-            return ret;
+            catch (Exception ex)
+            {
+                if (!CatchAllExceptionsDefault)
+                    throw ex;
+                else
+                    return false;
+            }
         }
 
         /// <summary>
