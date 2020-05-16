@@ -5,7 +5,8 @@ About
 
 ## Download
 
-**[Latest Release](../../releases/latest)** 
++ **[NuGet](https://www.nuget.org/packages/DG.Serial)**
++ **[Latest Release](../../releases/latest)** 
 
 Copyright
 ---
