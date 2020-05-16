@@ -9,11 +9,11 @@ About
 
 Copyright
 ---
-Copyright (c) Davide Gironi, 2014<br/>
-[http://davidegironi.it] (http://davidegironi.it/)<br/>
+Copyright (c) Davide Gironi, 2014  
+[http://davidegironi.it](http://davidegironi.it/)  
 
 License
 ---
-Released under GPLv3.<br/>
+Released under GPLv3.  
 Please refer to LICENSE file for licensing information.
 
