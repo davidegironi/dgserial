@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DG.DGSerial</id>
+    <version>$version$</version>
+    <title>DGSerial</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://opensource.org/licenses/GPL-3.0</licenseUrl>
+    <projectUrl>https://github.com/davidegironi/dgserial</projectUrl>
+    <iconUrl>https://github.com/davidegironi/dgserial/raw/master/DGSerial/Resources/Images/DGSerial_logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>$copyright$</copyright>
+    <tags>Serial Port, Library</tags>
+  </metadata>
+  <files>
+    <file src="..\License\LICENSE" target="LICENSE" /> 
+  </files>
+</package>

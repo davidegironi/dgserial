@@ -1,7 +1,7 @@
 About
 ===
 
-**DGSerial** is **Serial Port** helper libray for *.NET.
+**DGSerial** is **Serial Port** helper library for *.NET.
 
 ## Download
 
