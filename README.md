@@ -8,13 +8,15 @@ About
 + **[NuGet](https://www.nuget.org/packages/DG.Serial)**
 + **[Latest Release](../../releases/latest)** 
 
-Copyright
----
+## Requirements
+
+* Microsoft Windows with .NET Framework 4, .NET Standard 2 or later
+
+## Development
+
+If you want to contribute, or you found a bug, please send an e-mail to the software author.
+
+## License
+
 Copyright (c) Davide Gironi, 2014  
-[http://davidegironi.it](http://davidegironi.it/)  
-
-License
----
-Released under GPLv3.  
-Please refer to LICENSE file for licensing information.
-
+DGSerial is an open source software licensed under the [GPLv3 license](http://opensource.org/licenses/GPL-3.0)

@@ -4,13 +4,8 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Linq;
-using System.Configuration;
-using System.Threading;
 using DG.Serial.Helper;
 using NUnit.Framework;
-using System.IO.Ports;
 
 namespace DG.Serial.Test
 {

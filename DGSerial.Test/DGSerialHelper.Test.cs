@@ -4,13 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Linq;
-using System.Configuration;
-using System.Threading;
 using DG.Serial.Helper;
 using NUnit.Framework;
-using System.IO.Ports;
+using System.Linq;
 
 namespace DG.Serial.Test
 {
@@ -30,16 +26,10 @@ namespace DG.Serial.Test
         }
 
         [Test]
-        public void FindPortNameByVIDPID()
-        {
-            Assert.That(DGSerialHelper.FindPortNameByVIDPID("xxxx", "xxxx").Length, Is.EqualTo(0));        
-        }
-
-        [Test]
         public void ListPorts()
         {
             Assert.That(DGSerialHelper.ListPorts().Count(), Is.AtLeast(1));
         }
-        
+
     }
 }

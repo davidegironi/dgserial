@@ -4,9 +4,8 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
+using System.IO.Ports;
 using System.Text;
-using System.Linq;
-using System.Management;
 
 namespace DG.Serial.Helper
 {
@@ -40,57 +39,12 @@ namespace DG.Serial.Helper
         }
 
         /// <summary>
-        /// Find all comports with the give VID and PID
-        /// </summary>
-        /// <param name="VID"></param>
-        /// <param name="PID"></param>
-        /// <returns></returns>
-        public static string[] FindPortNameByVIDPID(string VID, string PID)
-        {
-            string[] comports = new string[] { };
-
-            ManagementObjectCollection collection;
-            using (var searcher = new ManagementObjectSearcher(string.Format(@"Select * From WIN32_SerialPort WHERE PNPDeviceID Like '%VID_{0}&PID_{1}%'", VID, PID)))
-                collection = searcher.Get();
-
-            foreach (var device in collection)
-            {
-                string description = device.GetPropertyValue("Description").ToString();
-                string deviceID = device.GetPropertyValue("DeviceID").ToString();
-                string name = device.GetPropertyValue("Name").ToString();
-
-                comports = comports.Concat(new string[] { deviceID }).ToArray();
-            }
-
-            collection.Dispose();
-
-            return comports;
-        }
-
-        /// <summary>
         /// List all serial ports
         /// </summary>
         /// <returns></returns>
         public static string[] ListPorts()
         {
-            string[] comports = new string[] { };
-
-            ManagementObjectCollection collection;
-            using (var searcher = new ManagementObjectSearcher(@"SELECT * FROM Win32_SerialPort"))
-                collection = searcher.Get();
-
-            foreach (var device in collection)
-            {
-                string description = device.GetPropertyValue("Description").ToString();
-                string deviceID = device.GetPropertyValue("DeviceID").ToString();
-                string name = device.GetPropertyValue("Name").ToString();
-
-                comports = comports.Concat(new string[] { deviceID }).ToArray();
-            }
-
-            collection.Dispose();
-
-            return comports;
+            return SerialPort.GetPortNames();
         }
 
     }

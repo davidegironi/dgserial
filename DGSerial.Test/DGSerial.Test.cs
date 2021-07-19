@@ -9,7 +9,9 @@ using NUnit.Framework;
 using System;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
+using System.Reflection;
 using System.Threading;
 
 namespace DG.Serial.Test
@@ -21,6 +23,26 @@ namespace DG.Serial.Test
         private static int _baudRate1 = 0;
         private static string _portName2 = "";
         private static int _baudRate2 = 0;
+
+        /// <summary>
+        /// Initialized app config for .NET core
+        /// </summary>
+        [OneTimeSetUp]
+        public void InitializeTestRunnerAppConfig()
+        {
+            string appConfigPath = Assembly.GetExecutingAssembly().Location + ".config";
+            if (!File.Exists(appConfigPath))
+                return;
+            Configuration configurationApp = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = appConfigPath }, ConfigurationUserLevel.None);
+            Configuration configurationActive = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (configurationApp == configurationActive)
+                return;
+            configurationActive.AppSettings.Settings.Clear();
+            foreach (string key in configurationApp.AppSettings.Settings.AllKeys)
+                configurationActive.AppSettings.Settings.Add(configurationApp.AppSettings.Settings[key]);
+            configurationActive.Save();
+            ConfigurationManager.RefreshSection("appSettings");
+        }
 
         public DGSerialTest()
         {

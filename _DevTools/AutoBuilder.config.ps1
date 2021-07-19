@@ -6,10 +6,9 @@ $solutionName = "DGSerial"
 $versionMajor = "1"
 $versionMinor = "0"
 $versionBuild = GetVersionBuild
-$versionRevision = "5"
+$versionRevision = "6"
 #build version number
-$assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
-$fileVersion = $assemblyVersion
+$version = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 
 #base folder for of the solution
 $baseDir  = Resolve-Path .\..\
@@ -44,21 +43,30 @@ $builds = @(
 			}
 		);
 		#files to include in the release binary package
-		ReleaseBinIncludeFiles = @();
+		ReleaseBinIncludeFiles = @(
+			@{
+				Name = "DGSerial";
+				Files = @(
+					@{
+						FileNameFrom = "..\License";
+						FileNameTo = "."
+					},
+					@{
+						FileNameFrom = "..\README.md";
+						FileNameTo = "README.md"
+					}
+				)
+			}
+		);
 		#unit tests to run
 		Tests = @(
 			@{
-				Name = "DGSerial.Test";
-				TestDll = "DGSerial.Test.dll"
+				Name = "DGSerial.Test"
 			}
 		);
 		#commands to run before packaging of the release source
 		ReleaseSrcCmd = @();
 		#commands to run before packaging of the release source
-		ReleaseBinCmd = @(
-			@{
-				Cmd = ".\copylicense.bat"
-			}
-		);
+		ReleaseBinCmd = @();
 	};
 )
