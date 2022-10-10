@@ -236,7 +236,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return false;
@@ -260,7 +260,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return false;
@@ -283,7 +283,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return false;
@@ -304,7 +304,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return;
@@ -325,7 +325,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return;
@@ -347,7 +347,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return -1;
@@ -369,7 +369,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return -1;
@@ -391,7 +391,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return;
@@ -445,6 +445,7 @@ namespace DG.Serial
                             }
                             Thread.Sleep(triesMstime);
                         }
+                        sw.Stop();
                     }
                     else
                     {
@@ -467,7 +468,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return null;
@@ -538,7 +539,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return null;
@@ -606,7 +607,7 @@ namespace DG.Serial
             }
             catch (Exception ex)
             {
-                if (!CatchAllExceptionsDefault)
+                if (!CatchAllExceptions)
                     throw ex;
                 else
                     return false;
