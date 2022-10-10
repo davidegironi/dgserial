@@ -4,9 +4,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DG.Serial.Test</RootNamespace>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <Version>1.0.25919.6</Version>
-    <AssemblyVersion>1.0.25919.6</AssemblyVersion>
-    <FileVersion>1.0.25919.6</FileVersion>
+    <Version>1.0.27410.7</Version>
+    <AssemblyVersion>1.0.27410.7</AssemblyVersion>
+    <FileVersion>1.0.27410.7</FileVersion>
     <XmlTransformDllPath Condition="'$(XmlTransformDllPath)' == '' AND '$(MSBuildRuntimeType)' == 'core'">$(MSBuildSDKsPath)/Microsoft.NET.Sdk.Publish/tools/net5.0/Microsoft.NET.Sdk.Publish.Tasks.dll</XmlTransformDllPath>
     <XmlTransformDllPath Condition="'$(XmlTransformDllPath)' == '' AND '$(MSBuildRuntimeType)' != 'core'">$(MSBuildSDKsPath)/Microsoft.NET.Sdk.Publish/tools/net472/Microsoft.NET.Sdk.Publish.Tasks.dll</XmlTransformDllPath>
     <XmlTransformDllPath Condition="!Exists($(XmlTransformDllPath))">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.Publishing.Tasks.dll</XmlTransformDllPath>

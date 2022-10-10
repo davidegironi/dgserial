@@ -5,10 +5,10 @@
     <RootNamespace>DG.Serial</RootNamespace>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyName>DGSerial</AssemblyName>
-    <Version>1.0.25919.6</Version>
-    <AssemblyVersion>1.0.25919.6</AssemblyVersion>
-    <FileVersion>1.0.25919.6</FileVersion>
-    <PackageVersion>1.0.25919.6</PackageVersion>
+    <Version>1.0.27410.7</Version>
+    <AssemblyVersion>1.0.27410.7</AssemblyVersion>
+    <FileVersion>1.0.27410.7</FileVersion>
+    <PackageVersion>1.0.27410.7</PackageVersion>
     <Title>DGSerial</Title>
     <Description>Serial Port helper library for .NET</Description>
     <Product>DGSerial</Product>
