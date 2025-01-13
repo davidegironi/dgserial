@@ -5,10 +5,10 @@
     <RootNamespace>DG.Serial</RootNamespace>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyName>DGSerial</AssemblyName>
-    <Version>1.0.27410.7</Version>
-    <AssemblyVersion>1.0.27410.7</AssemblyVersion>
-    <FileVersion>1.0.27410.7</FileVersion>
-    <PackageVersion>1.0.27410.7</PackageVersion>
+    <Version>1.0.30113.8</Version>
+    <AssemblyVersion>1.0.30113.8</AssemblyVersion>
+    <FileVersion>1.0.30113.8</FileVersion>
+    <PackageVersion>1.0.30113.8</PackageVersion>
     <Title>DGSerial</Title>
     <Description>Serial Port helper library for .NET</Description>
     <Product>DGSerial</Product>
@@ -23,11 +23,17 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>DGSerial_logo.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Copyright (c) Davide Gironi, 2015</Copyright>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\License\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>
+      </PackagePath>
+    </None>
+    <None Include="..\README.md" Link="README.md">
       <Pack>True</Pack>
       <PackagePath>
       </PackagePath>
