@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk;Microsoft.NET.Sdk.Publish">
+﻿<Project Sdk="Microsoft.NET.Sdk;Microsoft.NET.Sdk.Publish">
   <PropertyGroup>
     <TargetFrameworks>net40;net5.0</TargetFrameworks>
     <OutputType>Library</OutputType>
@@ -9,19 +9,11 @@
     <FileVersion>1.0.30113.8</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="App.Debug.config">
-      <DependentUpon>App.config</DependentUpon>
-    </None>
-    <None Update="App.Release.config">
-      <DependentUpon>App.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DGSerial\DGSerial.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="NUnit" Version="3.14.0" />
+  <PackageReference Include="NUnit" Version="3.14.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
@@ -30,13 +22,4 @@
   <ItemGroup>
     <Reference Include="System.Configuration" Condition="'$(TargetFramework)' == 'net40'" />
   </ItemGroup>
-  <Target Name="ApplyConfigurationConfigFile" AfterTargets="PrepareForBuild" Condition="Exists('App.$(Configuration).config')">
-    <ItemGroup>
-      <AppConfigWithTargetPath Remove="App.config" />
-      <AppConfigWithTargetPath Include="$(IntermediateOutputPath)$(TargetFileName).config">
-        <TargetPath>$(TargetFileName).config</TargetPath>
-      </AppConfigWithTargetPath>
-    </ItemGroup>
-    <TransformXml Source="App.config" Destination="$(IntermediateOutputPath)$(TargetFileName).config" Transform="App.$(Configuration).config" />
-  </Target>
 </Project>
