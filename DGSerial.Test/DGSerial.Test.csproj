@@ -8,6 +8,9 @@
     <AssemblyVersion>1.0.30113.8</AssemblyVersion>
     <FileVersion>1.0.30113.8</FileVersion>
   </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.3" PrivateAssets="All"/>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DGSerial\DGSerial.csproj" />
   </ItemGroup>
